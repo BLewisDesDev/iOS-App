@@ -9,9 +9,18 @@
 import UIKit
 import CoreData
 
+struct StudentObj {
+    var id : String = ""
+    var fName : String = ""
+    var lName : String = ""
+    var gender : String = ""
+    var course : String = ""
+    var age : String = ""
+    var address : String = ""
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -84,19 +93,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
             return appDelegate.persistentContainer.viewContext
         }
+    
+    /*
+    let ids : String = idTxt.text!
+    let fns : String = fnTxt.text!
+    let lns : String = lnTxt.text!
+    var genders : String
+    let courses : String = courseTxt.text!
+    let ages : String = ageLbl.text!
+    let addys : String = addressTxt.text!
+    */
         
-        func storeStudent (/*name: String, size: String, price: Int*/) {
+    func storeStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
         
             let context = getContext()
-            let entity = NSEntityDescription.entity(forEntityName: "Pizza", in:context)
+            let entity = NSEntityDescription.entity(forEntityName: "Student", in:context)
             
         
             let transc = NSManagedObject(entity: entity!, insertInto: context) //set the entity values
             
-        
-    //        transc.setValue(name, forKey: "name")
-    //        transc.setValue(size, forKey: "size")
-    //        transc.setValue(price, forKey: "price")
+                transc.setValue(id, forKey: "id")
+                transc.setValue(fName, forKey: "fName")
+                transc.setValue(lName, forKey: "lName")
+                transc.setValue(gender, forKey: "gender")
+                transc.setValue(course, forKey: "course")
+                transc.setValue(age, forKey: "age")
+                transc.setValue(address, forKey: "address")
         
             //save the object
         
@@ -114,7 +136,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
             
-        func getStudentInfo () -> String {
+        func getStudentInfoString () -> String {
 
             var info = ""
 
@@ -125,18 +147,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
                     for trans in searchResults as [NSManagedObject] {
 
-    //                    let name = trans.value(forKey: "name") as! String
-    //                    let size = trans.value(forKey: "size") as! String
-    //                    let price = String(trans.value(forKey: "price") as! Int)
-    //
-    //                    info = info + name + ", " + size + ", " + price + "\n"
+                        let id = trans.value(forKey: "id") as! String
+                        let fName = trans.value(forKey: "fName") as! String
+                        let lName = trans.value(forKey: "lName") as! String
+                        let gender = trans.value(forKey: "gender") as! String
+                        let course = trans.value(forKey: "course") as! String
+                        let age = trans.value(forKey: "age") as! String
+                        let address = trans.value(forKey: "address") as! String
+
+                        info = info + id + ", " + fName + ", " + lName + ", " + gender + ", " + course + ", " + age + ", " + address + "\n"
                     }
-                
+
                 } catch {
                     print("Error with request: \(error)")
                 }
             return info;
         }
+    
+    func getStudentInfoObj () -> StudentObj {
+
+        var record = StudentObj()
+
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Student")
+
+        do {
+            let searchResults = try getContext().fetch(fetchRequest)
+
+                for trans in searchResults as [NSManagedObject] {
+
+                    record.id = trans.value(forKey: "id") as! String
+                    record.fName = trans.value(forKey: "fName") as! String
+                    record.lName = trans.value(forKey: "lName") as! String
+                    record.gender = trans.value(forKey: "gender") as! String
+                    record.course = trans.value(forKey: "course") as! String
+                    record.age = trans.value(forKey: "age") as! String
+                    record.address = trans.value(forKey: "address") as! String
+                    
+                }
+            
+            } catch {
+                print("Error with request: \(error)")
+            }
+        
+        return record;
+    }
         
         func removeRecords () {
             let context = getContext()

@@ -26,6 +26,7 @@ class EditSdudentViewController: UIViewController {
         ageStep.wraps = true
         ageStep.autorepeat = true
         ageStep.maximumValue = 110
+
     }
 
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -33,22 +34,25 @@ class EditSdudentViewController: UIViewController {
 //    }
 
     @IBAction func save(_ sender: Any) {
+        
         let ids : String = idTxt.text!
         let fns : String = fnTxt.text!
         let lns : String = lnTxt.text!
-        var sexs : String
+        var genders : String
         let courses : String = courseTxt.text!
         let ages : String = ageLbl.text!
         let addys : String = addressTxt.text!
         
         if self.genderSelect.selectedSegmentIndex == 0 {
-            sexs = "Male";
+            genders = "Male";
         }
         else {
-            sexs = "Female";
+            genders = "Female";
         }
         
-//        Save to database
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.storeStudent(id: ids, fName: fns, lName: lns, gender: genders, course: courses, age: ages, address: addys)
+        
     }
     
     
