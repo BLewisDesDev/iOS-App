@@ -77,6 +77,80 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func getContext () -> NSManagedObjectContext {
+        
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+            return appDelegate.persistentContainer.viewContext
+        }
+        
+        func storeStudent (/*name: String, size: String, price: Int*/) {
+        
+            let context = getContext()
+            let entity = NSEntityDescription.entity(forEntityName: "Pizza", in:context)
+            
+        
+            let transc = NSManagedObject(entity: entity!, insertInto: context) //set the entity values
+            
+        
+    //        transc.setValue(name, forKey: "name")
+    //        transc.setValue(size, forKey: "size")
+    //        transc.setValue(price, forKey: "price")
+        
+            //save the object
+        
+            do {
+        
+                try context.save()
+        
+            }catch let error as NSError {
+         
+                print("Could not save \(error), \(error.userInfo)")
+                
+            }
+            catch {
+                
+            }
+        }
+            
+        func getStudentInfo () -> String {
+
+            var info = ""
+
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Student")
+
+            do {
+                let searchResults = try getContext().fetch(fetchRequest)
+
+                    for trans in searchResults as [NSManagedObject] {
+
+    //                    let name = trans.value(forKey: "name") as! String
+    //                    let size = trans.value(forKey: "size") as! String
+    //                    let price = String(trans.value(forKey: "price") as! Int)
+    //
+    //                    info = info + name + ", " + size + ", " + price + "\n"
+                    }
+                
+                } catch {
+                    print("Error with request: \(error)")
+                }
+            return info;
+        }
+        
+        func removeRecords () {
+            let context = getContext()
+            let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
+            let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+            
+            do {
+                try context.execute(deleteRequest)
+                try context.save()
+                
+            } catch {
+                print ("There was an error")
+            }
+        }
 
 }
 

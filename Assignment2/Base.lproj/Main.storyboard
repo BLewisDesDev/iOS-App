@@ -311,8 +311,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="18 " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ra-78-wtl">
-                                <rect key="frame" x="289" y="572" width="25" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="16" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ra-78-wtl">
+                                <rect key="frame" x="289" y="572" width="55" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -340,6 +340,7 @@
                                     <color key="titleColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="save:" destination="iuv-YT-DNy" eventType="touchUpInside" id="FL6-Ku-CdZ"/>
                                     <segue destination="0tS-y3-gFJ" kind="show" id="EfF-nQ-z7l"/>
                                 </connections>
                             </button>
@@ -371,10 +372,14 @@
                                     <segment title="Female"/>
                                 </segments>
                             </segmentedControl>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="18" minimumValue="18" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="nuZ-w6-SrY">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="16" minimumValue="16" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="nuZ-w6-SrY">
                                 <rect key="frame" x="187" y="567" width="94" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" systemColor="tertiaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="setAge:" destination="iuv-YT-DNy" eventType="valueChanged" id="KJf-iE-Fe0"/>
+                                </connections>
                             </stepper>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s3n-gC-9hJ">
                                 <rect key="frame" x="184" y="617" width="167" height="34"/>
@@ -414,6 +419,16 @@
                         <viewLayoutGuide key="safeArea" id="2dc-dZ-cwI"/>
                     </view>
                     <navigationItem key="navigationItem" id="pa6-PR-6Oh"/>
+                    <connections>
+                        <outlet property="addressTxt" destination="s3n-gC-9hJ" id="Wij-jS-z63"/>
+                        <outlet property="ageLbl" destination="6Ra-78-wtl" id="VTy-fF-ynA"/>
+                        <outlet property="ageStep" destination="nuZ-w6-SrY" id="dcf-3P-ErH"/>
+                        <outlet property="courseTxt" destination="jJU-hV-obu" id="qkF-P3-PnQ"/>
+                        <outlet property="fnTxt" destination="nSh-6X-nmV" id="v4f-kw-yFn"/>
+                        <outlet property="genderSelect" destination="D5D-HT-E9e" id="m4t-zg-tGD"/>
+                        <outlet property="idTxt" destination="eij-N6-YDj" id="H1d-1l-eME"/>
+                        <outlet property="lnTxt" destination="9Ae-2G-qsW" id="p51-YM-sv1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jK9-bB-fg8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
