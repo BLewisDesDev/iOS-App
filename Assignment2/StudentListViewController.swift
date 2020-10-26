@@ -1,17 +1,20 @@
-//
+
 //  StudentListViewController.swift
 //  Assignment2
-//
+
 //  Created by Collective X on 24/10/20.
 //  Copyright © 2020 Byron. All rights reserved.
-//
+
 
 import UIKit
-//import SwiftUI
 
 class StudentListViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var studentTable: UITableView!
+    @IBOutlet weak var btnViewDetail: UIButton!
+    
+    
+    var selectedStudent = StudentObj();
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -31,10 +34,29 @@ class StudentListViewController: UIViewController , UITableViewDelegate, UITable
         return cell;
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedStudent = StudentArray[indexPath.row]
+    }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(selectedStudent.id == "") {
+
+        } else {
+            var vc = segue.destination as! StudentDetailViewController
+            vc.studentRecord = selectedStudent
+        }
+        
     }
     
+    @IBAction func viewDetail(_ sender: Any) {
+//        performSegue(withIdentifier: "viewDetail", sender: self)
+        
+        if(selectedStudent.id == "") {
 
-
+        } else {
+            performSegue(withIdentifier: "viewDetail", sender: self)
+        }
+    }
+    
 }
