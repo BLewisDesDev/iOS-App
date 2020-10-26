@@ -1,10 +1,9 @@
-//
+
 //  AppDelegate.swift
 //  Assignment2
 //
 //  Created by Collective X on 24/10/20.
 //  Copyright © 2020 Byron. All rights reserved.
-//
 
 import UIKit
 import CoreData
@@ -18,6 +17,8 @@ struct StudentObj {
     var age : String = ""
     var address : String = ""
 }
+
+var StudentArray = [StudentObj]()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -88,30 +89,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getContext () -> NSManagedObjectContext {
-        
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        
             return appDelegate.persistentContainer.viewContext
         }
-    
-    /*
-    let ids : String = idTxt.text!
-    let fns : String = fnTxt.text!
-    let lns : String = lnTxt.text!
-    var genders : String
-    let courses : String = courseTxt.text!
-    let ages : String = ageLbl.text!
-    let addys : String = addressTxt.text!
-    */
         
     func storeStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
         
             let context = getContext()
             let entity = NSEntityDescription.entity(forEntityName: "Student", in:context)
             
-        
             let transc = NSManagedObject(entity: entity!, insertInto: context) //set the entity values
-            
+        
                 transc.setValue(id, forKey: "id")
                 transc.setValue(fName, forKey: "fName")
                 transc.setValue(lName, forKey: "lName")
@@ -120,14 +108,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 transc.setValue(age, forKey: "age")
                 transc.setValue(address, forKey: "address")
         
-            //save the object
-        
             do {
         
                 try context.save()
         
             }catch let error as NSError {
-         
+                
                 print("Could not save \(error), \(error.userInfo)")
                 
             }
@@ -136,45 +122,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
             
-        func getStudentInfoString () -> String {
-
-            var info = ""
-
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Student")
-
-            do {
-                let searchResults = try getContext().fetch(fetchRequest)
-
-                    for trans in searchResults as [NSManagedObject] {
-
-                        let id = trans.value(forKey: "id") as! String
-                        let fName = trans.value(forKey: "fName") as! String
-                        let lName = trans.value(forKey: "lName") as! String
-                        let gender = trans.value(forKey: "gender") as! String
-                        let course = trans.value(forKey: "course") as! String
-                        let age = trans.value(forKey: "age") as! String
-                        let address = trans.value(forKey: "address") as! String
-
-                        info = info + id + ", " + fName + ", " + lName + ", " + gender + ", " + course + ", " + age + ", " + address + "\n"
-                    }
-
-                } catch {
-                    print("Error with request: \(error)")
-                }
-            return info;
-        }
+//        func getStudentInfoString () -> String {
+//
+//            var info = ""
+//
+//            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Student")
+//
+//            do {
+//                let searchResults = try getContext().fetch(fetchRequest)
+//
+//                    for trans in searchResults as [NSManagedObject] {
+//
+//                        let id = trans.value(forKey: "id") as! String
+//                        let fName = trans.value(forKey: "fName") as! String
+//                        let lName = trans.value(forKey: "lName") as! String
+//                        let gender = trans.value(forKey: "gender") as! String
+//                        let course = trans.value(forKey: "course") as! String
+//                        let age = trans.value(forKey: "age") as! String
+//                        let address = trans.value(forKey: "address") as! String
+//
+//                        info = info + id + ", " +
+//                                fName + ", " +
+//                                lName + ", " +
+//                                gender + ", " +
+//                                course + ", " +
+//                                age + ", " +
+//                                address + "\n"
+//                    }
+//
+//                } catch {
+//                    print("Error with request: \(error)")
+//                }
+//            return info;
+//        }
     
-    func getStudentInfoObj () -> StudentObj {
+    func getStudentInfo () {
 
+        StudentArray.removeAll()
         var record = StudentObj()
-
+        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Student")
 
         do {
             let searchResults = try getContext().fetch(fetchRequest)
 
                 for trans in searchResults as [NSManagedObject] {
-
+                    
                     record.id = trans.value(forKey: "id") as! String
                     record.fName = trans.value(forKey: "fName") as! String
                     record.lName = trans.value(forKey: "lName") as! String
@@ -182,29 +175,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     record.course = trans.value(forKey: "course") as! String
                     record.age = trans.value(forKey: "age") as! String
                     record.address = trans.value(forKey: "address") as! String
+                    StudentArray.append(record)
                     
                 }
             
             } catch {
                 print("Error with request: \(error)")
             }
-        
-        return record;
     }
+    
+    func removeRecords () {
+        let context = getContext()
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
         
-        func removeRecords () {
-            let context = getContext()
-            let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
             
-            do {
-                try context.execute(deleteRequest)
-                try context.save()
-                
-            } catch {
-                print ("There was an error")
-            }
+        } catch {
+            print ("There was an error")
         }
-
+    }
 }
 

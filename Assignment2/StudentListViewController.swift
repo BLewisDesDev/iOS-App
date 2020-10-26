@@ -7,13 +7,24 @@
 //
 
 import UIKit
-import SwiftUI
+//import SwiftUI
 
-class StudentListViewController: UIViewController {
+class StudentListViewController: UIViewController /*, UITableViewDelegate, UITableViewDataSource */ {
+    
+    @IBOutlet weak var studentTable: UITableView!
+    
+    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
 //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
     }
 
