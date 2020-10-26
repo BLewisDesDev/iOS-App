@@ -90,11 +90,18 @@
                                                     <rect key="frame" x="316" y="11" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <state key="normal" title="Edit"/>
+                                                    <connections>
+                                                        <segue destination="ncI-N6-u6e" kind="show" id="4ID-OU-0eh"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="0tS-y3-gFJ" id="Gea-ok-XH7"/>
+                                    <outlet property="delegate" destination="0tS-y3-gFJ" id="ZeJ-Qg-LvS"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddC-N7-WYY">
                                 <rect key="frame" x="20" y="15" width="40" height="44"/>
@@ -132,7 +139,7 @@
             <objects>
                 <viewController id="ncI-N6-u6e" customClass="StudentDetailViewController" customModule="Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UrP-eo-B5V">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="scaleAspectFit" fixedFrame="YES" image="person.crop.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="BcQ-Bu-Bup">
@@ -358,7 +365,6 @@
                                 </state>
                                 <connections>
                                     <action selector="save:" destination="iuv-YT-DNy" eventType="touchUpInside" id="FL6-Ku-CdZ"/>
-                                    <segue destination="0tS-y3-gFJ" kind="show" id="EfF-nQ-z7l"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y4e-Tf-abN">
@@ -463,6 +469,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Xq0-Ug-hzD"/>
-        <segue reference="gjF-Ds-n9S"/>
+        <segue reference="7I8-zm-cik"/>
     </inferredMetricsTieBreakers>
 </document>

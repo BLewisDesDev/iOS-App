@@ -22,16 +22,10 @@ class EditSdudentViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         ageStep.wraps = true
         ageStep.autorepeat = true
         ageStep.maximumValue = 110
-
     }
-
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//
-//    }
 
     @IBAction func save(_ sender: Any) {
         
@@ -52,6 +46,20 @@ class EditSdudentViewController: UIViewController {
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.storeStudent(id: ids, fName: fns, lName: lns, gender: genders, course: courses, age: ages, address: addys)
+        
+        let aleart = UIAlertController(title: "Alert", message: "Student added to database", preferredStyle: UIAlertController.Style.alert)
+        
+        aleart.addAction(UIAlertAction.init(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        
+        self.present(aleart, animated: true, completion: nil)
+        
+        //Reset Values
+        idTxt.text = ""
+        fnTxt.text = ""
+        lnTxt.text = ""
+        courseTxt.text = ""
+        ageLbl.text = "16"
+        addressTxt.text = ""
         
     }
     
