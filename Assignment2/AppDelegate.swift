@@ -247,10 +247,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func removeMultipleExams (id : String) {
+    func removeMultipleExams (name : String) {
         let context = getContext()
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Exam")
-            deleteFetch.predicate = NSPredicate(format: "id = %@", id)
+            deleteFetch.predicate = NSPredicate(format: "name = %@", name)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
         do {
             try context.execute(deleteRequest)

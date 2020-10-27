@@ -65,6 +65,12 @@ class ExamEditViewController: UIViewController {
     }
     
     @IBAction func clearForm(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.removeMultipleExams(name: selectedExam.exName)
+
+        let aleart = UIAlertController(title: "Success", message: "Exam record deleted", preferredStyle: UIAlertController.Style.alert)
+        aleart.addAction(UIAlertAction.init(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        self.present(aleart, animated: true, completion: nil)
         clear()
     }
     
