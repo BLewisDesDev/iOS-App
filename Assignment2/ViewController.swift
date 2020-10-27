@@ -2,7 +2,9 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var btnListView: UIButton!
+    
     @IBOutlet weak var btnList: UIButton!
     
     override func viewDidLoad() {
@@ -10,5 +12,8 @@ class ViewController: UIViewController {
         
     }
 
+    @IBAction func goToList(_ sender: Any) {
+        performSegue(withIdentifier: "goToList", sender: self)
+    }
 }
 

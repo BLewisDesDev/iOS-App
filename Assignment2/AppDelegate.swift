@@ -122,7 +122,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
             
-    func getStudentInfo () {
+    func getStudentInfo() {
 
         StudentArray.removeAll()
         
@@ -164,22 +164,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-//    func updateStudent (key : String) {
+    func updateStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
+        let context = getContext()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
+        
+        fetchRequest.predicate = NSPredicate(format: "id = %@", id)
+
+        do {
+            let searchResults = try context.fetch(fetchRequest)
+
+            let objectUpdate = searchResults[0] as! NSManagedObject
+            objectUpdate.setValue(id, forKey: "id")
+            objectUpdate.setValue(fName, forKey: "fNmae")
+            objectUpdate.setValue(lName, forKey: "lName")
+            objectUpdate.setValue(gender, forKey: "gender")
+            objectUpdate.setValue(age, forKey: "Age")
+            objectUpdate.setValue(course, forKey: "course")
+            objectUpdate.setValue(address, forKey: "Address")
+
+            do {
+                try context.save()
+            } catch {
+                print(error)
+            }
+        }
+        catch {
+            print(error)
+        }
+    }
+    
+//    func updateStudent (student : StudentObj) {
 //        let context = getContext()
 //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
-//        fetchRequest.predicate = NSPredicate(format: "fName = %@", key)
+//        fetchRequest.predicate = NSPredicate(format: "id = %@", student.id)
 //
 //        do {
 //            let searchResults = try context.fetch(fetchRequest)
 //
 //            let objectUpdate = searchResults[0] as! NSManagedObject
-//            objectUpdate.setValue("TEST", forKey: "id")
-//            objectUpdate.setValue("TEST", forKey: "fNmae")
-//            objectUpdate.setValue("TEST", forKey: "lName")
-//            objectUpdate.setValue("TEST", forKey: "gender")
-//            objectUpdate.setValue("TEST", forKey: "Age")
-//            objectUpdate.setValue("TEST", forKey: "course")
-//            objectUpdate.setValue("TEST", forKey: "Address")
+//            objectUpdate.setValue(student.id, forKey: "id")
+//            objectUpdate.setValue(student.fName, forKey: "fNmae")
+//            objectUpdate.setValue(student.lName, forKey: "lName")
+//            objectUpdate.setValue(student.gender, forKey: "gender")
+//            objectUpdate.setValue(student.age, forKey: "age")
+//            objectUpdate.setValue(student.course, forKey: "course")
+//            objectUpdate.setValue(student.address, forKey: "address")
 //
 //            do {
 //                try context.save()
@@ -192,37 +221,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            print(error)
 //        }
 //    }
-    
-    
-    
-    
-    func updateStudent (student : StudentObj) {
-        let context = getContext()
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
-        fetchRequest.predicate = NSPredicate(format: "id = %@", student.id)
-        
-        do {
-            let searchResults = try context.fetch(fetchRequest)
-            
-            let objectUpdate = searchResults[0] as! NSManagedObject
-            objectUpdate.setValue(student.id, forKey: "id")
-            objectUpdate.setValue(student.fName, forKey: "fNmae")
-            objectUpdate.setValue(student.lName, forKey: "lName")
-            objectUpdate.setValue(student.gender, forKey: "gender")
-            objectUpdate.setValue(student.age, forKey: "age")
-            objectUpdate.setValue(student.course, forKey: "course")
-            objectUpdate.setValue(student.address, forKey: "address")
-            
-            do {
-                try context.save()
-            } catch {
-                print(error)
-            }
-        
-        }
-        catch {
-            print(error)
-        }
-    }
 }
 

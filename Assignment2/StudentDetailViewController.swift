@@ -10,7 +10,7 @@ import UIKit
 
 class StudentDetailViewController: UIViewController {
     
-    var studentRecord = StudentObj()
+    var selectedStudent = StudentObj(id: "", fName: "", lName: "", gender: "", course: "", age: "", address: "")
     
     @IBOutlet weak var id: UILabel!
     @IBOutlet weak var fn: UILabel!
@@ -22,17 +22,28 @@ class StudentDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        id.text = studentRecord.id
-        fn.text = studentRecord.fName
-        ln.text = studentRecord.lName
-        g.text = studentRecord.gender
-        cor.text = studentRecord.course
-        age.text = studentRecord.age
-        ad.text = studentRecord.address
+        id.text = selectedStudent.id
+        fn.text = selectedStudent.fName
+        ln.text = selectedStudent.lName
+        g.text = selectedStudent.gender
+        cor.text = selectedStudent.course
+        age.text = selectedStudent.age
+        ad.text = selectedStudent.address
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        if id.text == "" {
+        } else {
+            var vc = segue.destination as! EditSdudentViewController
+            vc.selectedStudent = selectedStudent
+        }
     }
 
+    @IBAction func editStudent(_ sender: Any) {
+        if id.text == "" {
+        } else {
+            performSegue(withIdentifier: "editStudent", sender: self)
+        }
+    }
 }

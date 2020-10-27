@@ -1,10 +1,9 @@
-//
+
 //  EditSdudentViewController.swift
 //  Assignment2
-//
+
 //  Created by Collective X on 24/10/20.
 //  Copyright © 2020 Byron. All rights reserved.
-//
 
 import UIKit
 
@@ -19,12 +18,23 @@ class EditSdudentViewController: UIViewController {
     @IBOutlet weak var addressTxt: UITextField!
     @IBOutlet weak var ageLbl: UILabel!
     
-
+    var selectedStudent = StudentObj(id: "", fName: "String", lName: "", gender: "", course: "", age: "", address: "")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         ageStep.wraps = true
         ageStep.autorepeat = true
         ageStep.maximumValue = 110
+        
+        if (selectedStudent.id != ""){
+            idTxt.text = selectedStudent.id
+            fnTxt.text = selectedStudent.fName
+            lnTxt.text = selectedStudent.lName
+            //gender
+            courseTxt.text = selectedStudent.course
+            ageLbl.text = selectedStudent.age
+            addressTxt.text = selectedStudent.address
+        }
     }
 
     @IBAction func save(_ sender: Any) {
@@ -45,27 +55,45 @@ class EditSdudentViewController: UIViewController {
         }
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.storeStudent(id: ids, fName: fns, lName: lns, gender: genders, course: courses, age: ages, address: addys)
         
-        let aleart = UIAlertController(title: "Alert", message: "Student added to database", preferredStyle: UIAlertController.Style.alert)
+        if (selectedStudent.id == "") {
+            appDelegate.storeStudent(id: ids, fName: fns, lName: lns, gender: genders, course: courses, age: ages, address: addys)
+            
+            let aleart = UIAlertController(title: "Success", message: "Student added to database", preferredStyle: UIAlertController.Style.alert)
+            
+            aleart.addAction(UIAlertAction.init(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            
+            self.present(aleart, animated: true, completion: nil)
+            
+        } else {
+//            appDelegate.updateStudent(id: ids, fName: fns, lName: lns, gender: genders, course: courses, age: ages, address: addys)
+
+            let aleart = UIAlertController(title: "Success", message: "Student updated", preferredStyle: UIAlertController.Style.alert)
+
+            aleart.addAction(UIAlertAction.init(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+
+            self.present(aleart, animated: true, completion: nil)
+        }
         
-        aleart.addAction(UIAlertAction.init(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+        clear()
         
-        self.present(aleart, animated: true, completion: nil)
-        
-        //Reset Values
+    }
+    
+    @IBAction func setAge(_ sender: Any) {
+        let step = Int(ageStep.value)
+        ageLbl.text = String(step)
+    }
+    
+    @IBAction func clearForm(_ sender: Any) {
+        clear()
+    }
+    
+    func clear() {
         idTxt.text = ""
         fnTxt.text = ""
         lnTxt.text = ""
         courseTxt.text = ""
         ageLbl.text = "16"
         addressTxt.text = ""
-        
-    }
-    
-    
-    @IBAction func setAge(_ sender: Any) {
-        let step = Int(ageStep.value)
-        ageLbl.text = String(step)
     }
 }

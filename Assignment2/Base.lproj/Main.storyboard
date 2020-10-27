@@ -31,7 +31,8 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="View Student List"/>
                                 <connections>
-                                    <segue destination="0tS-y3-gFJ" kind="show" id="gjF-Ds-n9S"/>
+                                    <action selector="goToList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="UYT-Ff-6Tm"/>
+                                    <segue destination="0tS-y3-gFJ" kind="show" identifier="goToList" id="gjF-Ds-n9S"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="scaleAspectFit" fixedFrame="YES" image="sparkles" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Xpn-ty-Nv5">
@@ -60,6 +61,7 @@
                     <navigationItem key="navigationItem" id="VEE-0e-eeS"/>
                     <connections>
                         <outlet property="btnList" destination="Jrn-6s-BJ1" id="Vhr-rv-3Va"/>
+                        <outlet property="btnListView" destination="Jrn-6s-BJ1" id="KB2-hx-hhR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -100,7 +102,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="PHZ-Ap-4A4"/>
+                                    <action selector="goToHome:" destination="0tS-y3-gFJ" eventType="touchUpInside" id="jO6-aG-J6V"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="backToHome" id="PHZ-Ap-4A4"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pef-Rx-ffS">
@@ -111,7 +114,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="iuv-YT-DNy" kind="show" id="Xq0-Ug-hzD"/>
+                                    <action selector="goToForm:" destination="0tS-y3-gFJ" eventType="touchUpInside" id="9CU-Wg-8TI"/>
+                                    <segue destination="iuv-YT-DNy" kind="show" identifier="goToForm" id="Xq0-Ug-hzD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIu-61-qXR">
@@ -133,6 +137,7 @@
                     <navigationItem key="navigationItem" id="maK-Cz-27p"/>
                     <connections>
                         <outlet property="btnViewDetail" destination="JIu-61-qXR" id="F6o-xF-3Fn"/>
+                        <outlet property="goToForm" destination="fBG-dv-mvU" id="RUh-9l-aYi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vtG-VE-JXP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -258,7 +263,9 @@
                                     <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="iuv-YT-DNy" kind="show" id="HT5-M0-Hkn"/>
+                                    <action selector="editRecord:" destination="05N-L6-a33" eventType="touchUpInside" id="Lfk-Km-AQs"/>
+                                    <action selector="editStudent:" destination="ncI-N6-u6e" eventType="touchUpInside" id="fLJ-Sk-zsR"/>
+                                    <segue destination="iuv-YT-DNy" kind="show" identifier="editStudent" id="HT5-M0-Hkn"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCa-dc-0Wm">
@@ -303,8 +310,9 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fb4-eE-8Ar" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="05N-L6-a33" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1831.8840579710147" y="-173.4375"/>
+            <point key="canvasLocation" x="1832" y="-260"/>
         </scene>
         <!--Edit Sdudent View Controller-->
         <scene sceneID="tDN-wC-l4D">
@@ -388,6 +396,9 @@
                                 <state key="normal" title="Clear">
                                     <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="clearForm:" destination="iuv-YT-DNy" eventType="touchUpInside" id="id7-QZ-KpN"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eij-N6-YDj">
                                 <rect key="frame" x="184" y="297" width="167" height="34"/>
@@ -469,7 +480,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jK9-bB-fg8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1857.9710144927537" y="525.66964285714289"/>
+            <point key="canvasLocation" x="1832" y="521"/>
         </scene>
     </scenes>
     <resources>

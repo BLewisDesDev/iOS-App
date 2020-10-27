@@ -12,6 +12,7 @@ class StudentListViewController: UIViewController , UITableViewDelegate, UITable
     
     @IBOutlet weak var studentTable: UITableView!
     @IBOutlet weak var btnViewDetail: UIButton!
+    @IBOutlet var goToForm: UIView!
     
     
     var selectedStudent = StudentObj();
@@ -39,24 +40,24 @@ class StudentListViewController: UIViewController , UITableViewDelegate, UITable
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if(selectedStudent.id == "") {
 
         } else {
             var vc = segue.destination as! StudentDetailViewController
-            vc.studentRecord = selectedStudent
+            vc.selectedStudent = selectedStudent
         }
-        
     }
     
     @IBAction func viewDetail(_ sender: Any) {
-//        performSegue(withIdentifier: "viewDetail", sender: self)
-        
-        if(selectedStudent.id == "") {
+        performSegue(withIdentifier: "viewDetail", sender: self)
+    }
+    
+    @IBAction func goToHome(_ sender: Any) {
+        performSegue(withIdentifier: "backToHome", sender: self)
+    }
 
-        } else {
-            performSegue(withIdentifier: "viewDetail", sender: self)
-        }
+    @IBAction func goToForm(_ sender: Any) {
+        performSegue(withIdentifier: "goToForm", sender: self)
     }
     
 }
