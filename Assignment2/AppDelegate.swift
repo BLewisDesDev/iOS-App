@@ -17,7 +17,15 @@ struct StudentObj {
     var address : String = ""
 }
 
+struct ExamObj {
+    var id : String = ""
+    var exName : String = ""
+    var exLocation : String = ""
+    var dateTime : String = ""
+}
+
 var StudentArray:[StudentObj] = []
+var ExamArray:[ExamObj] = []
 
 
 @UIApplicationMain
@@ -87,10 +95,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    // MARK: - My Methods
+    
     func getContext () -> NSManagedObjectContext {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            return appDelegate.persistentContainer.viewContext
-        }
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        return appDelegate.persistentContainer.viewContext
+    }
+    
+    // -- -- -- -- -- -- -- Student -- -- -- -- -- -- -- \\
+    
+    func getStudentInfo() {
+        StudentArray.removeAll()
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Student")
+
+        do {
+            let searchResults = try getContext().fetch(fetchRequest)
+                for trans in searchResults as [NSManagedObject] {
+                    let record = StudentObj(id: trans.value(forKey: "id") as! String,
+                                            fName: trans.value(forKey: "fName") as! String,
+                                            lName: trans.value(forKey: "lName") as! String,
+                                            gender: trans.value(forKey: "gender") as! String,
+                                            course: trans.value(forKey: "course") as! String,
+                                            age: trans.value(forKey: "age") as! String,
+                                            address: trans.value(forKey: "address") as! String)
+                    
+                        StudentArray.append(record)
+                }
+            } catch {
+                print("Error with request: \(error)")
+            }
+    }
         
     func storeStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
         
@@ -114,30 +148,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             catch {
             }
         }
-            
-    func getStudentInfo() {
-
-        StudentArray.removeAll()
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Student")
+    
+    func updateStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
+        let context = getContext()
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
+            fetchRequest.predicate = NSPredicate(format: "id = %@", id)
 
         do {
-            let searchResults = try getContext().fetch(fetchRequest)
-                for trans in searchResults as [NSManagedObject] {
-                    let record = StudentObj(id: trans.value(forKey: "id") as! String,
-                                            fName: trans.value(forKey: "fName") as! String,
-                                            lName: trans.value(forKey: "lName") as! String,
-                                            gender: trans.value(forKey: "gender") as! String,
-                                            course: trans.value(forKey: "course") as! String,
-                                            age: trans.value(forKey: "age") as! String,
-                                            address: trans.value(forKey: "address") as! String)
-                    
-                        StudentArray.append(record)
-                }
+            let searchResults = try context.fetch(fetchRequest)
+
+            let objectUpdate = searchResults[0] as! NSManagedObject
+            objectUpdate.setValue(id, forKey: "id")
+            objectUpdate.setValue(fName, forKey: "fName")
+            objectUpdate.setValue(lName, forKey: "lName")
+            objectUpdate.setValue(gender, forKey: "gender")
+            objectUpdate.setValue(age, forKey: "age")
+            objectUpdate.setValue(course, forKey: "course")
+            objectUpdate.setValue(address, forKey: "address")
+
+            do {
+                try context.save()
             } catch {
-                print("Error with request: \(error)")
+                print(error)
             }
+        }
+        catch {
+            print(error)
+        }
     }
-    
+            
     func removeRecords () {
         let context = getContext()
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
@@ -167,88 +206,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func updateStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
-        let context = getContext()
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
-            fetchRequest.predicate = NSPredicate(format: "id = %@", id)
-
+    // -- -- -- -- -- -- -- Exam -- -- -- -- -- -- -- \\
+    
+    func getExamInfo() {
+        ExamArray.removeAll()
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Exam")
+        
         do {
-            let searchResults = try context.fetch(fetchRequest)
-
-            let objectUpdate = searchResults[0] as! NSManagedObject
-            objectUpdate.setValue(id, forKey: "id")
-            objectUpdate.setValue(fName, forKey: "fName")
-            objectUpdate.setValue(lName, forKey: "lName")
-            objectUpdate.setValue(gender, forKey: "gender")
-            objectUpdate.setValue(age, forKey: "age")
-            objectUpdate.setValue(course, forKey: "course")
-            objectUpdate.setValue(address, forKey: "address")
-
-            do {
-                try context.save()
-            } catch {
-                print(error)
+        let searchResults = try getContext().fetch(fetchRequest)
+            
+            for trans in searchResults as [NSManagedObject] {
+                let record = ExamObj(   id : trans.value(forKey: "id") as! String,
+                                        exName : trans.value(forKey: "name") as! String,
+                                        exLocation : trans.value(forKey: "location") as! String,
+                                        dateTime : trans.value(forKey: "dateTime") as! String)
+                
+                    ExamArray.append(record)
             }
+        } catch {
+            print("Error with request: \(error)")
+        }
+        
+    }
+    
+    func storeExam (id: String, exName: String, exLocation: String, dateTime: String) {
+    
+        let context = getContext()
+        let entity = NSEntityDescription.entity(forEntityName: "Exam", in:context)
+        
+        let transc = NSManagedObject(entity: entity!, insertInto: context) //set the
+            transc.setValue(id, forKey: "id")
+            transc.setValue(exName, forKey: "name")
+            transc.setValue(exLocation, forKey: "location")
+            transc.setValue(dateTime, forKey: "dateTime")
+        do {
+            try context.save()
+            
+        }catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
         }
         catch {
-            print(error)
         }
     }
     
-//    func updateStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
-//        let context = getContext()
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
-//            fetchRequest.predicate = NSPredicate(format: "id = %@", id)
-//
-//        do {
-//            let searchResults = try context.fetch(fetchRequest)
-//
-//            let objectUpdate = searchResults[0] as! NSManagedObject
-//            objectUpdate.setValue(id, forKey: "id")
-//            objectUpdate.setValue(fName, forKey: "fNmae")
-//            objectUpdate.setValue(lName, forKey: "lName")
-//            objectUpdate.setValue(gender, forKey: "gender")
-//            objectUpdate.setValue(age, forKey: "age")
-//            objectUpdate.setValue(course, forKey: "course")
-//            objectUpdate.setValue(address, forKey: "address")
-//
-//            do {
-//                try context.save()
-//            } catch {
-//                print(error)
-//            }
-//        }
-//        catch {
-//            print(error)
-//        }
-//    }
-//
-//    func updateStudentObj (student : StudentObj) {
-//        let context = getContext()
-//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
-//        fetchRequest.predicate = NSPredicate(format: "id = %@", student.id)
-//
-//        do {
-//            let searchResults = try context.fetch(fetchRequest)
-//
-//            let objectUpdate = searchResults[0] as! NSManagedObject
-//            objectUpdate.setValue(student.id, forKey: "id")
-//            objectUpdate.setValue(student.fName, forKey: "fNmae")
-//            objectUpdate.setValue(student.lName, forKey: "lName")
-//            objectUpdate.setValue(student.gender, forKey: "gender")
-//            objectUpdate.setValue(student.age, forKey: "age")
-//            objectUpdate.setValue(student.course, forKey: "course")
-//            objectUpdate.setValue(student.address, forKey: "address")
-//
-//            do {
-//                try context.save()
-//            } catch {
-//                print(error)
-//            }
-//        }
-//        catch {
-//            print(error)
-//        }
-//    }
 }
 

@@ -11,25 +11,32 @@ import UIKit
 class ExamEditViewController: UIViewController {
     
     @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var exName: UITextField!
+    @IBOutlet weak var exLocation: UITextField!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         datePicker.setValue(UIColor.white, forKeyPath: "textColor")
         datePicker.datePickerMode = .date
         datePicker.datePickerMode = .dateAndTime
-//        datePicker.addTarget(self, action: #selector(selectedDate), for: .valueChanged)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func saveExam(_ sender: Any) {
+        let name : String = exName.text!
+        let location : String = exLocation.text!
+        let dateFormatter = DateFormatter(); dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        let date = dateFormatter.string(from: datePicker.date);
+        
     }
-    */
-
+    
+    
+    @IBAction func clearForm(_ sender: Any) {
+        clear()
+    }
+    
+    func clear() {
+        exName.text = ""
+        exLocation.text = "";
+    }
+    
 }
