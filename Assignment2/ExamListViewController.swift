@@ -8,23 +8,47 @@
 
 import UIKit
 
-class ExamListViewController: UIViewController {
+class ExamListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    @IBOutlet weak var examTable: UITableView!
+    
+    var selectedStudent = StudentObj()
+    var selectedExam = ExamObj()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        
+        appDelegate.getExamInfo(id: selectedStudent.id)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ExamArray.count
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+                let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "myExamCell", for: indexPath)
+        cell.textLabel!.text = ExamArray[indexPath.row].exName + " " + ExamArray[indexPath.row].exLocation
+        return cell;
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedExam = ExamArray[indexPath.row]
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "viewDetails" {
+            let vc = segue.destination as! StudentDetailViewController
+            vc.selectedStudent = selectedStudent
+        } else if segue.identifier == "viewExam" {
+            let vc = segue.destination as! ExamEditViewController
+            vc.selectedExam = selectedExam
+            vc.selectedStudent = selectedStudent
+        } else if segue.identifier == "addExam" {
+            let vc = segue.destination as! ExamEditViewController
+                vc.selectedStudent = selectedStudent
+        }
+    }
+    
 }

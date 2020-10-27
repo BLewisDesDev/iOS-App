@@ -40,9 +40,10 @@ class StudentDetailViewController: UIViewController {
         } else if segue.identifier == "backToListi" {
              _ = segue.destination as!  StudentListViewController
         }else if segue.identifier == "deleteBack" {
-        _ = segue.destination as!  StudentListViewController
+            _ = segue.destination as!  StudentListViewController
         }else if segue.identifier == "showExams" {
-        _ = segue.destination as! ExamListViewController
+            let vc = segue.destination as! ExamListViewController
+                vc.selectedStudent = selectedStudent
         }
     }
     

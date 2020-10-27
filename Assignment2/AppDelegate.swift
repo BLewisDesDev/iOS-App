@@ -127,27 +127,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
         
     func storeStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
+        let context = getContext()
+        let entity = NSEntityDescription.entity(forEntityName: "Student", in:context)
         
-            let context = getContext()
-            let entity = NSEntityDescription.entity(forEntityName: "Student", in:context)
+        let transc = NSManagedObject(entity: entity!, insertInto: context) //set the
+            transc.setValue(id, forKey: "id")
+            transc.setValue(fName, forKey: "fName")
+            transc.setValue(lName, forKey: "lName")
+            transc.setValue(gender, forKey: "gender")
+            transc.setValue(course, forKey: "course")
+            transc.setValue(age, forKey: "age")
+            transc.setValue(address, forKey: "address")
+        do {
+            try context.save()
             
-            let transc = NSManagedObject(entity: entity!, insertInto: context) //set the
-                transc.setValue(id, forKey: "id")
-                transc.setValue(fName, forKey: "fName")
-                transc.setValue(lName, forKey: "lName")
-                transc.setValue(gender, forKey: "gender")
-                transc.setValue(course, forKey: "course")
-                transc.setValue(age, forKey: "age")
-                transc.setValue(address, forKey: "address")
-            do {
-                try context.save()
-                
-            }catch let error as NSError {
-                print("Could not save \(error), \(error.userInfo)")
-            }
-            catch {
-            }
+        }catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
         }
+        catch {
+        }
+    }
     
     func updateStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
         let context = getContext()
@@ -208,9 +207,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // -- -- -- -- -- -- -- Exam -- -- -- -- -- -- -- \\
     
-    func getExamInfo() {
+    func getExamInfo(id : String) {
         ExamArray.removeAll()
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Exam")
+            fetchRequest.predicate = NSPredicate(format: "id = %@", id)
         
         do {
         let searchResults = try getContext().fetch(fetchRequest)
@@ -226,11 +226,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } catch {
             print("Error with request: \(error)")
         }
-        
     }
     
     func storeExam (id: String, exName: String, exLocation: String, dateTime: String) {
-    
         let context = getContext()
         let entity = NSEntityDescription.entity(forEntityName: "Exam", in:context)
         
@@ -249,5 +247,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func removeMultipleExams (id : String) {
+        let context = getContext()
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Exam")
+            deleteFetch.predicate = NSPredicate(format: "id = %@", id)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+            
+        } catch {
+            print ("There was an error")
+        }
+    }
 }
 

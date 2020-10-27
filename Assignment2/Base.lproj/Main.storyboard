@@ -343,7 +343,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="ncI-N6-u6e" kind="show" identifier="backToStudentView" id="CXX-AF-Ghw"/>
+                                    <segue destination="ncI-N6-u6e" kind="show" identifier="viewDetails" id="CXX-AF-Ghw"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MfB-w1-LLf">
@@ -354,7 +354,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="TOV-In-Wew" kind="show" identifier="AddExam" id="xxz-Bj-Og3"/>
+                                    <segue destination="TOV-In-Wew" kind="show" identifier="addExam" id="xxz-Bj-Og3"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wg7-FB-4jc">
@@ -372,8 +372,8 @@
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
-                                    <outlet property="dataSource" destination="0tS-y3-gFJ" id="cG3-Gx-AMa"/>
-                                    <outlet property="delegate" destination="0tS-y3-gFJ" id="7jr-t8-dH9"/>
+                                    <outlet property="dataSource" destination="6Y6-FF-x1n" id="xhC-wC-epo"/>
+                                    <outlet property="delegate" destination="6Y6-FF-x1n" id="gKn-fh-uTt"/>
                                 </connections>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Exam List" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PL6-YI-ae0">
@@ -390,12 +390,18 @@
                                 <state key="normal" title="View">
                                     <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <segue destination="TOV-In-Wew" kind="show" identifier="viewExam" id="Tk2-d0-O7y"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="cQU-tb-7mX"/>
                     </view>
                     <navigationItem key="navigationItem" id="4ax-GF-Bt1"/>
+                    <connections>
+                        <outlet property="examTable" destination="Wg7-FB-4jc" id="4D3-2e-zaw"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mVA-SH-WnZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -681,8 +687,9 @@
         <image name="sparkles" catalog="system" width="56" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="xxz-Bj-Og3"/>
         <segue reference="Xq0-Ug-hzD"/>
-        <segue reference="D5d-fy-NgB"/>
+        <segue reference="1Z7-ia-VcO"/>
         <segue reference="CXX-AF-Ghw"/>
         <segue reference="ceY-Ih-a8E"/>
     </inferredMetricsTieBreakers>
