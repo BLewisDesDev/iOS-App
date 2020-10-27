@@ -38,26 +38,17 @@ class StudentListViewController: UIViewController , UITableViewDelegate, UITable
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedStudent = StudentArray[indexPath.row]
     }
-
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(selectedStudent.id == "") {
-
-        } else {
+        if segue.identifier == "viewDetail" {
             var vc = segue.destination as! StudentDetailViewController
             vc.selectedStudent = selectedStudent
+        } else if segue.identifier == "goToForm" {
+             _ = segue.destination as!  EditSdudentViewController
+        }else if segue.identifier == "backToHome" {
+        _ = segue.destination as!  ViewController
         }
     }
-    
-    @IBAction func viewDetail(_ sender: Any) {
-        performSegue(withIdentifier: "viewDetail", sender: self)
-    }
-    
-    @IBAction func goToHome(_ sender: Any) {
-        performSegue(withIdentifier: "backToHome", sender: self)
-    }
-
-    @IBAction func goToForm(_ sender: Any) {
-        performSegue(withIdentifier: "goToForm", sender: self)
-    }
-    
 }

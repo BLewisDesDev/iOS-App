@@ -66,7 +66,7 @@ class EditSdudentViewController: UIViewController {
             self.present(aleart, animated: true, completion: nil)
             
         } else {
-//            appDelegate.updateStudent(id: ids, fName: fns, lName: lns, gender: genders, course: courses, age: ages, address: addys)
+            appDelegate.updateStudent(id: ids, fName: fns, lName: lns, gender: genders, course: courses, age: ages, address: addys)
 
             let aleart = UIAlertController(title: "Success", message: "Student updated", preferredStyle: UIAlertController.Style.alert)
 

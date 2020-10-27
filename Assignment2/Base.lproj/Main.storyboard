@@ -102,7 +102,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="goToHome:" destination="0tS-y3-gFJ" eventType="touchUpInside" id="jO6-aG-J6V"/>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="backToHome" id="PHZ-Ap-4A4"/>
                                 </connections>
                             </button>
@@ -114,7 +113,6 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="goToForm:" destination="0tS-y3-gFJ" eventType="touchUpInside" id="9CU-Wg-8TI"/>
                                     <segue destination="iuv-YT-DNy" kind="show" identifier="goToForm" id="Xq0-Ug-hzD"/>
                                 </connections>
                             </button>
@@ -126,7 +124,6 @@
                                     <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="viewDetail:" destination="0tS-y3-gFJ" eventType="touchUpInside" id="oCu-N6-aYH"/>
                                     <segue destination="ncI-N6-u6e" kind="show" identifier="viewDetail" id="zS4-mO-cZp"/>
                                 </connections>
                             </button>
@@ -264,7 +261,6 @@
                                 </state>
                                 <connections>
                                     <action selector="editRecord:" destination="05N-L6-a33" eventType="touchUpInside" id="Lfk-Km-AQs"/>
-                                    <action selector="editStudent:" destination="ncI-N6-u6e" eventType="touchUpInside" id="fLJ-Sk-zsR"/>
                                     <segue destination="iuv-YT-DNy" kind="show" identifier="editStudent" id="HT5-M0-Hkn"/>
                                 </connections>
                             </button>
@@ -275,13 +271,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="0tS-y3-gFJ" kind="show" id="ceY-Ih-a8E"/>
+                                    <segue destination="0tS-y3-gFJ" kind="show" identifier="backToListi" id="ceY-Ih-a8E"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eel-5h-M21">
-                                <rect key="frame" x="349" y="44" width="45" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Exams"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eyo-9f-5L1">
                                 <rect key="frame" x="238" y="733" width="81" height="36"/>
@@ -291,7 +282,8 @@
                                     <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="0tS-y3-gFJ" kind="show" id="ERX-7W-RmX"/>
+                                    <action selector="deleteStudent:" destination="ncI-N6-u6e" eventType="touchUpInside" id="Waf-45-EOW"/>
+                                    <segue destination="0tS-y3-gFJ" kind="show" identifier="deleteBack" id="ERX-7W-RmX"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -493,7 +485,8 @@
         <image name="sparkles" catalog="system" width="56" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="HT5-M0-Hkn"/>
+        <segue reference="zS4-mO-cZp"/>
+        <segue reference="Xq0-Ug-hzD"/>
         <segue reference="ERX-7W-RmX"/>
     </inferredMetricsTieBreakers>
 </document>

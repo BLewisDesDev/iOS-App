@@ -98,8 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let context = getContext()
             let entity = NSEntityDescription.entity(forEntityName: "Student", in:context)
             
-            let transc = NSManagedObject(entity: entity!, insertInto: context) //set the entity values
-        
+            let transc = NSManagedObject(entity: entity!, insertInto: context) //set the
                 transc.setValue(id, forKey: "id")
                 transc.setValue(fName, forKey: "fName")
                 transc.setValue(lName, forKey: "lName")
@@ -107,32 +106,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 transc.setValue(course, forKey: "course")
                 transc.setValue(age, forKey: "age")
                 transc.setValue(address, forKey: "address")
-        
             do {
-        
                 try context.save()
-        
+                
             }catch let error as NSError {
-                
                 print("Could not save \(error), \(error.userInfo)")
-                
             }
             catch {
-                
             }
         }
             
     func getStudentInfo() {
 
         StudentArray.removeAll()
-        
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Student")
 
         do {
             let searchResults = try getContext().fetch(fetchRequest)
-
                 for trans in searchResults as [NSManagedObject] {
-                    
                     let record = StudentObj(id: trans.value(forKey: "id") as! String,
                                             fName: trans.value(forKey: "fName") as! String,
                                             lName: trans.value(forKey: "lName") as! String,
@@ -142,9 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             address: trans.value(forKey: "address") as! String)
                     
                         StudentArray.append(record)
-                    
                 }
-            
             } catch {
                 print("Error with request: \(error)")
             }
@@ -154,7 +143,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let context = getContext()
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+            
+        } catch {
+            print ("There was an error")
+        }
+    }
+    
+    func removeSingleRecord (id : String) {
+        let context = getContext()
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
+            deleteFetch.predicate = NSPredicate(format: "id = %@", id)
         
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+
         do {
             try context.execute(deleteRequest)
             try context.save()
@@ -167,20 +171,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func updateStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
         let context = getContext()
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
-        
-        fetchRequest.predicate = NSPredicate(format: "id = %@", id)
+            fetchRequest.predicate = NSPredicate(format: "id = %@", id)
 
         do {
             let searchResults = try context.fetch(fetchRequest)
 
             let objectUpdate = searchResults[0] as! NSManagedObject
             objectUpdate.setValue(id, forKey: "id")
-            objectUpdate.setValue(fName, forKey: "fNmae")
+            objectUpdate.setValue(fName, forKey: "fName")
             objectUpdate.setValue(lName, forKey: "lName")
             objectUpdate.setValue(gender, forKey: "gender")
-            objectUpdate.setValue(age, forKey: "Age")
+            objectUpdate.setValue(age, forKey: "age")
             objectUpdate.setValue(course, forKey: "course")
-            objectUpdate.setValue(address, forKey: "Address")
+            objectUpdate.setValue(address, forKey: "address")
 
             do {
                 try context.save()
@@ -193,7 +196,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-//    func updateStudent (student : StudentObj) {
+//    func updateStudent (id: String, fName: String, lName: String, gender: String, course: String, age: String, address: String) {
+//        let context = getContext()
+//        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
+//            fetchRequest.predicate = NSPredicate(format: "id = %@", id)
+//
+//        do {
+//            let searchResults = try context.fetch(fetchRequest)
+//
+//            let objectUpdate = searchResults[0] as! NSManagedObject
+//            objectUpdate.setValue(id, forKey: "id")
+//            objectUpdate.setValue(fName, forKey: "fNmae")
+//            objectUpdate.setValue(lName, forKey: "lName")
+//            objectUpdate.setValue(gender, forKey: "gender")
+//            objectUpdate.setValue(age, forKey: "age")
+//            objectUpdate.setValue(course, forKey: "course")
+//            objectUpdate.setValue(address, forKey: "address")
+//
+//            do {
+//                try context.save()
+//            } catch {
+//                print(error)
+//            }
+//        }
+//        catch {
+//            print(error)
+//        }
+//    }
+//
+//    func updateStudentObj (student : StudentObj) {
 //        let context = getContext()
 //        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Student")
 //        fetchRequest.predicate = NSPredicate(format: "id = %@", student.id)
@@ -215,7 +246,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            } catch {
 //                print(error)
 //            }
-//
 //        }
 //        catch {
 //            print(error)

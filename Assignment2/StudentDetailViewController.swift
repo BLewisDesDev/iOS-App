@@ -30,20 +30,20 @@ class StudentDetailViewController: UIViewController {
         age.text = selectedStudent.age
         ad.text = selectedStudent.address
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if id.text == "" {
-        } else {
-            var vc = segue.destination as! EditSdudentViewController
-            vc.selectedStudent = selectedStudent
+        if segue.identifier == "editStudent" {
+            let vc = segue.destination as! EditSdudentViewController
+                vc.selectedStudent = selectedStudent
+        } else if segue.identifier == "backToListi" {
+             _ = segue.destination as!  StudentListViewController
+        }else if segue.identifier == "deleteBack" {
+        _ = segue.destination as!  StudentListViewController
         }
     }
-
-    @IBAction func editStudent(_ sender: Any) {
-        if id.text == "" {
-        } else {
-            performSegue(withIdentifier: "editStudent", sender: self)
-        }
+    
+    @IBAction func deleteStudent(_ sender: Any) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.removeSingleRecord(id: id.text ?? "")
     }
 }
