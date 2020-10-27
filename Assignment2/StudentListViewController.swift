@@ -5,7 +5,6 @@
 //  Created by Collective X on 24/10/20.
 //  Copyright © 2020 Byron. All rights reserved.
 
-
 import UIKit
 
 class StudentListViewController: UIViewController , UITableViewDelegate, UITableViewDataSource {
@@ -13,7 +12,6 @@ class StudentListViewController: UIViewController , UITableViewDelegate, UITable
     @IBOutlet weak var studentTable: UITableView!
     @IBOutlet weak var btnViewDetail: UIButton!
     @IBOutlet var goToForm: UIView!
-    
     
     var selectedStudent = StudentObj();
     
@@ -24,14 +22,13 @@ class StudentListViewController: UIViewController , UITableViewDelegate, UITable
             appDelegate.getStudentInfo()
         }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return StudentArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "myCell", for: indexPath)
-        cell.textLabel!.text = StudentArray[indexPath.row].fName
+        cell.textLabel!.text = StudentArray[indexPath.row].fName + " " + StudentArray[indexPath.row].lName + ", " + StudentArray[indexPath.row].id
         return cell;
     }
     
@@ -39,11 +36,9 @@ class StudentListViewController: UIViewController , UITableViewDelegate, UITable
         selectedStudent = StudentArray[indexPath.row]
     }
     
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "viewDetail" {
-            var vc = segue.destination as! StudentDetailViewController
+            let vc = segue.destination as! StudentDetailViewController
             vc.selectedStudent = selectedStudent
         } else if segue.identifier == "goToForm" {
              _ = segue.destination as!  EditSdudentViewController

@@ -1,12 +1,12 @@
-//
-//  StudentDetailViewController.swift
+
+//  SceneDelegate.swift
 //  Assignment2
-//
+
 //  Created by Collective X on 24/10/20.
 //  Copyright © 2020 Byron. All rights reserved.
-//
 
 import UIKit
+import MapKit
 
 class StudentDetailViewController: UIViewController {
     
@@ -18,7 +18,8 @@ class StudentDetailViewController: UIViewController {
     @IBOutlet weak var g: UILabel!
     @IBOutlet weak var cor: UILabel!
     @IBOutlet weak var age: UILabel!
-    @IBOutlet weak var ad: UILabel!
+    @IBOutlet weak var address: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class StudentDetailViewController: UIViewController {
         g.text = selectedStudent.gender
         cor.text = selectedStudent.course
         age.text = selectedStudent.age
-        ad.text = selectedStudent.address
+        address.setTitle(selectedStudent.address, for: .normal)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,4 +47,44 @@ class StudentDetailViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.removeSingleRecord(id: id.text ?? "")
     }
+    
+    @IBAction func findOnMap(_ sender: Any) {
+        coordinates(forAddress: selectedStudent.address) {
+            (location) in
+            guard let location = location else {
+                return
+            }
+            self.openMapForPlace(lat: location.latitude, long: location.longitude)
+        }
+    }
+     
+    public func openMapForPlace(lat:Double = 0, long:Double = 0, placeName:String = "") {
+         let latitude: CLLocationDegrees = lat
+         let longitude: CLLocationDegrees = long
+
+         let regionDistance:CLLocationDistance = 100
+         let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+         let regionSpan = MKCoordinateRegion(center: coordinates, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+         let options = [
+             MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+             MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+         ]
+         let placemark = MKPlacemark(coordinate: coordinates, addressDictionary: nil)
+         let mapItem = MKMapItem(placemark: placemark)
+         mapItem.name = placeName
+         mapItem.openInMaps(launchOptions: options)
+     }
+     
+     func coordinates(forAddress address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
+         let geocoder = CLGeocoder()
+         geocoder.geocodeAddressString(address) {
+             (placemarks, error) in
+             guard error == nil else {
+                 print("Geocoding error: \(error!)")
+                 completion(nil)
+                 return
+             }
+             completion(placemarks?.first?.location?.coordinate)
+         }
+     }
 }

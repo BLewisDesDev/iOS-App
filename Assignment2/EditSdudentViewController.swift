@@ -1,4 +1,3 @@
-
 //  EditSdudentViewController.swift
 //  Assignment2
 
@@ -76,7 +75,6 @@ class EditSdudentViewController: UIViewController {
         }
         
         clear()
-        
     }
     
     @IBAction func setAge(_ sender: Any) {

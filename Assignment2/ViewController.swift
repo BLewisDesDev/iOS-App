@@ -9,7 +9,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
 
     @IBAction func goToList(_ sender: Any) {

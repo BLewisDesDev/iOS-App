@@ -245,13 +245,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="placeholder" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gcN-4I-YLh">
-                                <rect key="frame" x="216" y="657" width="178" height="23"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cwy-M3-Inw">
                                 <rect key="frame" x="124" y="733" width="34" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -286,13 +279,24 @@
                                     <segue destination="0tS-y3-gFJ" kind="show" identifier="deleteBack" id="ERX-7W-RmX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUS-Ew-tWJ">
+                                <rect key="frame" x="216" y="653" width="178" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="placeholder">
+                                    <color key="titleColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="findOnMap:" destination="ncI-N6-u6e" eventType="touchUpInside" id="KGE-eF-CMN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="i3j-8w-aJb"/>
                     </view>
                     <navigationItem key="navigationItem" id="aY7-va-zIp"/>
                     <connections>
-                        <outlet property="ad" destination="gcN-4I-YLh" id="Lvl-gg-fSM"/>
+                        <outlet property="address" destination="aUS-Ew-tWJ" id="RJZ-vA-tRX"/>
                         <outlet property="age" destination="fLJ-tn-4kq" id="qOx-gw-hbS"/>
                         <outlet property="cor" destination="wJL-dj-YUk" id="RnM-Ac-ddF"/>
                         <outlet property="fn" destination="zQg-Oh-jMH" id="UVc-d9-WCR"/>
@@ -304,7 +308,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fb4-eE-8Ar" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="05N-L6-a33" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1832" y="-260"/>
+            <point key="canvasLocation" x="1831.8840579710147" y="-260.49107142857144"/>
         </scene>
         <!--Edit Sdudent View Controller-->
         <scene sceneID="tDN-wC-l4D">
@@ -485,8 +489,7 @@
         <image name="sparkles" catalog="system" width="56" height="64"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zS4-mO-cZp"/>
-        <segue reference="Xq0-Ug-hzD"/>
+        <segue reference="HT5-M0-Hkn"/>
         <segue reference="ERX-7W-RmX"/>
     </inferredMetricsTieBreakers>
 </document>
