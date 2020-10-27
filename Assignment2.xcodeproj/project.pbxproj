@@ -17,6 +17,8 @@
 		633BB81E2543DDBE00507318 /* StudentListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633BB81D2543DDBE00507318 /* StudentListViewController.swift */; };
 		633BB8202543EB6900507318 /* EditSdudentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633BB81F2543EB6900507318 /* EditSdudentViewController.swift */; };
 		633BB822254423FF00507318 /* StudentDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633BB821254423FF00507318 /* StudentDetailViewController.swift */; };
+		6340D42F2547EEE800410407 /* ExamListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340D42E2547EEE800410407 /* ExamListViewController.swift */; };
+		6340D4312547F03100410407 /* ExamEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340D4302547F03100410407 /* ExamEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		633BB81D2543DDBE00507318 /* StudentListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentListViewController.swift; sourceTree = "<group>"; };
 		633BB81F2543EB6900507318 /* EditSdudentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSdudentViewController.swift; sourceTree = "<group>"; };
 		633BB821254423FF00507318 /* StudentDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentDetailViewController.swift; sourceTree = "<group>"; };
+		6340D42E2547EEE800410407 /* ExamListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamListViewController.swift; sourceTree = "<group>"; };
+		6340D4302547F03100410407 /* ExamEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +74,8 @@
 				633BB81F2543EB6900507318 /* EditSdudentViewController.swift */,
 				633BB80C2543DA5A00507318 /* Main.storyboard */,
 				633BB821254423FF00507318 /* StudentDetailViewController.swift */,
+				6340D42E2547EEE800410407 /* ExamListViewController.swift */,
+				6340D4302547F03100410407 /* ExamEditViewController.swift */,
 				633BB81D2543DDBE00507318 /* StudentListViewController.swift */,
 				633BB8122543DA5D00507318 /* Assets.xcassets */,
 				633BB8142543DA5D00507318 /* LaunchScreen.storyboard */,
@@ -153,8 +159,10 @@
 				633BB81E2543DDBE00507318 /* StudentListViewController.swift in Sources */,
 				633BB80B2543DA5A00507318 /* ViewController.swift in Sources */,
 				633BB822254423FF00507318 /* StudentDetailViewController.swift in Sources */,
+				6340D4312547F03100410407 /* ExamEditViewController.swift in Sources */,
 				633BB8072543DA5A00507318 /* AppDelegate.swift in Sources */,
 				633BB8092543DA5A00507318 /* SceneDelegate.swift in Sources */,
+				6340D42F2547EEE800410407 /* ExamListViewController.swift in Sources */,
 				633BB8202543EB6900507318 /* EditSdudentViewController.swift in Sources */,
 				633BB8112543DA5A00507318 /* Assignment2.xcdatamodeld in Sources */,
 			);

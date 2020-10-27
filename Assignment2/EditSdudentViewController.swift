@@ -24,6 +24,7 @@ class EditSdudentViewController: UIViewController {
         ageStep.wraps = true
         ageStep.autorepeat = true
         ageStep.maximumValue = 110
+        ageStep.layer.cornerRadius = 5;
         
         if (selectedStudent.id != ""){
             idTxt.text = selectedStudent.id

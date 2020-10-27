@@ -19,6 +19,7 @@ class StudentDetailViewController: UIViewController {
     @IBOutlet weak var cor: UILabel!
     @IBOutlet weak var age: UILabel!
     @IBOutlet weak var address: UIButton!
+    @IBOutlet weak var btnExam: UIButton!
     
     
     override func viewDidLoad() {
@@ -40,6 +41,8 @@ class StudentDetailViewController: UIViewController {
              _ = segue.destination as!  StudentListViewController
         }else if segue.identifier == "deleteBack" {
         _ = segue.destination as!  StudentListViewController
+        }else if segue.identifier == "showExams" {
+        _ = segue.destination as! ExamListViewController
         }
     }
     
